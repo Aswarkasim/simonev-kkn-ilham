@@ -4,7 +4,7 @@ $user = $this->Crud_model->listingOne('tbl_user', 'id_user', $id_user);
 
 
 $this->load->model('master/Master_model', 'MM');
-$angkatan = $this->MM->list('tbl_angkatan', 'DESC');
+$angkatan = $this->MM->listGeneral('tbl_angkatan', 'DESC');
 ?>
 <div class="flash-data" data-flashdata="<?= $this->session->flashdata('msga') ?>"></div>
 <div class="gagal" data-flashdata="<?= $this->session->flashdata('msg_er') ?>"></div>
