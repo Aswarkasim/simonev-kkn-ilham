@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Master_model extends CI_Model
 {
-  public function list($table, $order = null)
+  public function listGeneral($table, $order = null)
   {
     $query = $this->db->select('*')
       ->from($table)
