@@ -17,7 +17,7 @@ class Mahasiswa extends CI_Controller
     public function index()
     {
         $id_angkatan = $this->session->userdata('id_angkatan');
-        $user = $this->AM->listMhsAngkatan($id_angkatan);
+        $user = $this->AM->listMhsAngkatanLokasiNull($id_angkatan);
 
         $list_lok = $this->Crud_model->listing('tbl_lokasi');
         $data = [

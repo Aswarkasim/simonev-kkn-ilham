@@ -25,16 +25,32 @@ class Proker extends CI_Controller
             $proker = $this->Crud_model->listingOneAll('tbl_proker', 'id_lokasi', $id_lokasi);
         } else if ($role = 'DPL') {
             $this->dplList();
+        } else if ($role = 'LP2M') {
+            $this->lp2mList();
         } else {
 
             $proker = $this->Crud_model->listing('tbl_proker');
+            $data = [
+                'add'      => 'admin/proker/add',
+                'edit'      => 'admin/proker/edit/',
+                'delete'      => 'admin/proker/delete/',
+                'proker'      => $proker,
+                'content'   => 'admin/proker/index'
+            ];
+
+            $this->load->view('admin/layout/wrapper', $data, FALSE);
         }
+    }
+
+    function lp2mList()
+    {
+        $id_angkatan = $this->session->userdata('id_angkatan');
+        $id_user = $this->session->userdata('id_user');
+        $lokasi = $this->AM->listDplLokasi($id_angkatan, $id_user);
+
         $data = [
-            'add'      => 'admin/proker/add',
-            'edit'      => 'admin/proker/edit/',
-            'delete'      => 'admin/proker/delete/',
-            'proker'      => $proker,
-            'content'   => 'admin/proker/index'
+            'lokasi'      => $lokasi,
+            'content'   => 'admin/proker/dpl_index'
         ];
 
         $this->load->view('admin/layout/wrapper', $data, FALSE);

@@ -9,9 +9,8 @@ class Logbook extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // if (($this->session->logbookdata('id_logbook') == "") || $this->session->logbookdata('role') != "Admin") {
-        //     redirect('error_page');
-        // }
+
+        $this->load->model('admin/Admin_model', 'AM');
     }
 
 
@@ -21,26 +20,51 @@ class Logbook extends CI_Controller
         $id_user = $this->session->userdata('id_user');
         if ($role == 'Mahasiswa') {
             $logbook = $this->Crud_model->listingOneAll('tbl_logbook', 'id_user', $id_user);
+
+            $data = [
+                'add'      => 'admin/logbook/add',
+                'edit'      => 'admin/logbook/edit/',
+                'delete'      => 'admin/logbook/delete/',
+                'logbook'      => $logbook,
+                'content'   => 'admin/logbook/index'
+            ];
+            $this->load->view('admin/layout/wrapper', $data, FALSE);
         } else {
             $logbook = $this->Crud_model->listing('tbl_logbook');
+            $this->listMhsLogbook($role);
         }
-        $data = [
-            'add'      => 'admin/logbook/add',
-            'edit'      => 'admin/logbook/edit/',
-            'delete'      => 'admin/logbook/delete/',
-            'logbook'      => $logbook,
-            'content'   => 'admin/logbook/index'
-        ];
+    }
 
+    function listMhsLogbook($role)
+    {
+        $id_angkatan = $this->session->userdata('id_angkatan');
+        // print_r($id_angkatan);
+        // die;
+        if (($role == 'LP2M') || $role == 'Admin') {
+            $mahasiswa = $this->AM->listMhsAngkatan($id_angkatan);
+        } else if ($role == 'DPL') {
+            $id_dpl = $this->session->userdata('id_user');
+            $mahasiswa = $this->AM->listMhsDpl($id_angkatan, $id_dpl);
+        }
+
+        $data = [
+            'mahasiswa' => $mahasiswa,
+            'content'   => 'admin/logbook/list_mhs_logbook'
+        ];
         $this->load->view('admin/layout/wrapper', $data, FALSE);
     }
 
-    function logbookData()
+    function listLogbook($id_user)
     {
-
-        $logbook = $this->Crud_model->listingLogbook();
-        echo json_encode($logbook);
+        // $logbook = $this->Crud_model->listingOneAll('tbl_logbook', 'id_user', $id_user);
+        $logbook = $this->Crud_model->listingOneAll('tbl_logbook', 'id_user', $id_user);
+        $data = [
+            'logbook'      => $logbook,
+            'content'   => 'admin/logbook/index'
+        ];
+        $this->load->view('admin/layout/wrapper', $data, FALSE);
     }
+
 
     function add()
     {

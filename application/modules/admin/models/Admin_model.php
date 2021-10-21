@@ -74,12 +74,21 @@ class Admin_model extends CI_Model
     return $this->db->get()->row();
   }
 
-  function listMhsAngkatan($id_angkatan)
+  function listMhsAngkatanLokasiNull($id_angkatan)
   {
     $this->db->select('*')
       ->from('tbl_user')
       ->where('role', 'mahasiswa')
       ->where('id_lokasi', null)
+      ->where('id_angkatan', $id_angkatan);
+    return $this->db->get()->result();
+  }
+
+  function listMhsAngkatan($id_angkatan)
+  {
+    $this->db->select('*')
+      ->from('tbl_user')
+      ->where('role', 'mahasiswa')
       ->where('id_angkatan', $id_angkatan);
     return $this->db->get()->result();
   }
@@ -91,6 +100,16 @@ class Admin_model extends CI_Model
       ->where('role', 'mahasiswa')
       ->where('id_angkatan', $id_angkatan)
       ->where('id_lokasi', $id_lokasi);
+    return $this->db->get()->result();
+  }
+
+  function listMhsDpl($id_angkatan, $id_dpl)
+  {
+    $this->db->select('*')
+      ->from('tbl_user')
+      ->where('role', 'mahasiswa')
+      ->where('id_angkatan', $id_angkatan)
+      ->where('id_dpl', $id_dpl);
     return $this->db->get()->result();
   }
 

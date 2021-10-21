@@ -21,26 +21,29 @@ class Laporan extends CI_Controller
 
     if ($role == 'Mahasiswa') {
       $laporan = $this->AM->cekLaporan($id_user, $id_lokasi);
-      $this->laporanMhs($laporan);
-    } else {
-      $laporan = $this->Crud_model->listing('tbl_laporan');
       $data = [
-        'title'       => 'List Laporan',
-        'add'         => 'admin/laporan/add',
-        'edit'        => 'admin/laporan/edit/',
         'laporan' => $laporan,
-        'content'     => 'admin/laporan/index'
+        'add'         => 'admin/laporan/add',
+        'content'     => 'admin/laporan/index_mhs'
       ];
       $this->load->view('admin/layout/wrapper', $data, FALSE);
+    } else {
+      $this->laporanMhs($role);
     }
   }
 
-  function laporanMhs($laporan)
+  function laporanMhs($role)
   {
+    $id_angkatan = $this->session->userdata('id_angkatan');
+    if (($role == 'LP2M') || $role == 'Admin') {
+      $mahasiswa = $this->AM->listMhsAngkatan($id_angkatan);
+    } else if ($role == 'DPL') {
+      $id_dpl = $this->session->userdata('id_user');
+      $mahasiswa = $this->AM->listMhsDpl($id_angkatan, $id_dpl);
+    }
     $data = [
-      'laporan' => $laporan,
-      'add'         => 'admin/laporan/add',
-      'content'     => 'admin/laporan/index_mhs'
+      'mahasiswa' => $mahasiswa,
+      'content'   => 'admin/laporan/list_mhs_laporan'
     ];
     $this->load->view('admin/layout/wrapper', $data, FALSE);
   }
