@@ -1,0 +1,39 @@
+<div class="flash-data" data-flashdata="<?= $this->session->flashdata('msg') ?>"></div>
+
+<div class="row">
+  <div class="col-md-6">
+
+
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Manajemen Proker Mahasiswa</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+
+        <table class="table DataTable">
+          <thead>
+            <tr>
+              <th width="40px">No</th>
+              <th>Nama</th>
+            </tr>
+          </thead>
+          <tbody id="targetData">
+            <?php $no = 1;
+            foreach ($lokasi as $row) { ?>
+              <tr>
+                <td><?= $no ?></td>
+                <td><a href=""><strong><?= $row->nama_lokasi ?></strong></a></td>
+
+              </tr>
+            <?php $no++;
+            } ?>
+          </tbody>
+        </table>
+
+      </div>
+      <!-- /.box-body -->
+    </div>
+
+  </div>
+</div>
