@@ -113,6 +113,14 @@ class Admin_model extends CI_Model
     return $this->db->get()->result();
   }
 
+  function listDpl($id_angkatan = null)
+  {
+    $this->db->select('*')
+      ->from('tbl_user')
+      ->where('role', 'DPL');
+    return $this->db->get()->result();
+  }
+
 
 
   function listProkerLokasi($id_angkatan, $id_lokasi)

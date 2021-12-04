@@ -23,7 +23,7 @@ class Angkatan extends CI_Controller
       'delete'  => 'master/angkatan/delete/'
     ];
 
-    $angkatan = $this->MM->list('tbl_angkatan', 'DESC');
+    $angkatan = $this->MM->listGeneral('tbl_angkatan', 'DESC');
     $data = [
 
       'angkatan' => $angkatan,

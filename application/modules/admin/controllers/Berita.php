@@ -195,4 +195,16 @@ class Berita extends CI_Controller
     $this->session->set_flashdata('msg', 'data telah dihapus');
     redirect('admin/berita/detail/' . $id_berita);
   }
+
+
+  function terkini()
+  {
+    $berita = $this->Crud_model->listingOneAll('tbl_berita', 'is_active', '1');
+    $data = [
+      'title'   => 'Berita Terkini',
+      'berita'    => $berita,
+      'content'  => 'admin/berita/terkini'
+    ];
+    $this->load->view('admin/layout/wrapper', $data, FALSE);
+  }
 }

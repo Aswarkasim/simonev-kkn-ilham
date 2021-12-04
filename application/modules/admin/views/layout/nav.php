@@ -56,63 +56,95 @@ $role = $this->session->userdata('role');
                             ?>"><a href="<?php echo base_url('admin/logbook')
                                             ?>"><i class="fa fa-list"></i> <span>Logbook</span></a></li>
 
-                <li class="<?php if ($this->uri->segment(2) == "laporan") {
+                <li class="<?php if ($this->uri->segment(2) == "") {
                                 echo "active";
                             }
-                            ?>"><a href="<?php echo base_url('admin/laporan')
-                                            ?>"><i class="fa fa-book"></i> <span>Laporan</span></a></li>
+                            ?>"><a href="<?php echo base_url('admin/laporan/index/Mahasiswa')
+                                            ?>"><i class="fa fa-book"></i> <span>Laporan Mahasiswa</span></a></li>
 
-                <li class="<?php if ($this->uri->segment(2) == "pengajuan") {
+                <?php if ($role == 'admin' || ($role == "LP2M")) {
+                ?>
+                    <li class="<?php if ($this->uri->segment(2) == "") {
+                                    echo "active";
+                                }
+                                ?>"><a href="<?php echo base_url('admin/laporan/index/DPL')
+                                            ?>"><i class="fa fa-book"></i> <span>Laporan DPL</span></a></li>
+                <?php } ?>
+
+                <?php if ($role == 'DPL') { ?>
+                    <li class="<?php if ($this->uri->segment(2) == "laporan/laporanDpl") {
+                                    echo "active";
+                                }
+                                ?>"><a href="<?php echo base_url('admin/laporan/laporanDpl')
+                                                ?>"><i class="fa fa-book"></i> <span>Upload Laporan</span></a></li>
+                <?php } ?>
+
+                <li class="<?php if ($this->uri->segment(2) == "dokumentasi") {
                                 echo "active";
                             }
-                            ?>"><a href="<?php echo base_url('admin/pengajuan')
-                                            ?>"><i class="fa fa-inbox"></i> <span>Pengajuan</span></a></li>
+                            ?>"><a href="<?php echo base_url('admin/dokumentasi')
+                                            ?>"><i class="fa fa-photo"></i> <span>Dokumentasi</span></a></li>
+
+                <?php if ($role != 'LP2M') { ?>
+                    <li class="<?php if ($this->uri->segment(2) == "pengajuan") {
+                                    echo "active";
+                                }
+                                ?>"><a href="<?php echo base_url('admin/pengajuan')
+                                                ?>"><i class="fa fa-inbox"></i> <span>Pengajuan</span></a></li>
+                <?php } ?>
             <?php } ?>
 
-            <li class="treeview <?php if ($this->uri->segment(2) == "berita") {
-                                    echo "active";
-                                } ?>">
-                <a href="#"><i class="fa fa-object-group"></i> <span>Berita</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-
-                    <li class="<?php if ($this->uri->segment(3) == "add") {
-                                    echo "active";
-                                } ?>"><a href="<?= base_url('admin/berita/add') ?>"><?= $role == 'Mahasiswa' ? 'Usulkan Berita' : 'Tambah Berita'; ?></a></li>
-                    <?php if (($role == 'Admin') || $role == 'Profesi') { ?>
-                        <li class="<?php if ($this->uri->segment(3) == "index") {
+            <?php if ($role == 'Profesi' || ($role == 'Mahasiswa')) { ?>
+                <li class="treeview <?php if ($this->uri->segment(2) == "berita") {
                                         echo "active";
-                                    } ?>"><a href="<?= base_url('admin/berita/index') ?>">List Berita</a></li>
-                    <?php } ?>
-                </ul>
-            </li>
-
-
-            <li class="treeview <?php if ($this->uri->segment(2) == "download") {
-                                    echo "active";
-                                } ?>">
-                <a href="#"><i class="fa fa-download"></i> <span>Unduh</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <?php if (($role == 'Admin') || $role == 'LP2M') { ?>
-                        <li class="<?php if ($this->uri->segment(2) == "administrasi") {
+                                    } ?>">
+                    <a href="#"><i class="fa fa-object-group"></i> <span>Berita</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="<?php if ($this->uri->segment(3) == "terkini") {
                                         echo "active";
-                                    } ?>"><a href="<?= base_url('admin/administrasi') ?>">List Unduh</a></li>
-                    <?php } ?>
+                                    } ?>"><a href="<?= base_url('admin/berita/terkini') ?>">Berita Terkini</a></li>
 
-                    <li class="<?php if ($this->uri->segment(2) == "downloadPage") {
-                                    echo "active";
-                                } ?>"><a href="<?= base_url('admin/administrasi/downloadPage') ?>">Download</a></li>
-                </ul>
-            </li>
+                        <li class="<?php if ($this->uri->segment(3) == "add") {
+                                        echo "active";
+                                    } ?>"><a href="<?= base_url('admin/berita/add') ?>"><?= $role == 'Mahasiswa' ? 'Usulkan Berita' : 'Tambah Berita'; ?></a></li>
+                        <?php if (($role == 'Admin') || $role == 'Profesi') { ?>
+                            <li class="<?php if ($this->uri->segment(3) == "index") {
+                                            echo "active";
+                                        } ?>"><a href="<?= base_url('admin/berita/index') ?>">List Berita</a></li>
+                        <?php } ?>
+                    </ul>
+                </li>
+            <?php } ?>
 
-            <?php if ($role != 'Profesi') { ?>
+
+            <?php if ($role != 'LP2M') { ?>
+                <li class="treeview <?php if ($this->uri->segment(2) == "download") {
+                                        echo "active";
+                                    } ?>">
+                    <a href="#"><i class="fa fa-download"></i> <span>Unduh Format</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <?php if ($role == 'Admin') { ?>
+                            <li class="<?php if ($this->uri->segment(2) == "administrasi") {
+                                            echo "active";
+                                        } ?>"><a href="<?= base_url('admin/administrasi') ?>">List Unduh</a></li>
+                        <?php } ?>
+
+                        <li class="<?php if ($this->uri->segment(2) == "downloadPage") {
+                                        echo "active";
+                                    } ?>"><a href="<?= base_url('admin/administrasi/downloadPage') ?>">Download</a></li>
+                    </ul>
+                </li>
+            <?php } ?>
+
+            <?php if (($role == 'Mahasiswa') || ($role == 'LP2m') || ($role == 'Admin')) { ?>
                 <li class="treeview <?php if ($this->uri->segment(2) == "penilaian") {
                                         echo "active";
                                     } ?>">

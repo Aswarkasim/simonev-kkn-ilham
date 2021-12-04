@@ -30,6 +30,9 @@ class Proker extends CI_Controller
         } else {
 
             $proker = $this->Crud_model->listing('tbl_proker');
+        }
+
+        if (isset($proker)) {
             $data = [
                 'add'      => 'admin/proker/add',
                 'edit'      => 'admin/proker/edit/',

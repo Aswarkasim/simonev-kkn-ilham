@@ -13,8 +13,9 @@ class Laporan extends CI_Controller
   }
 
 
-  public function index()
+  public function index($laporan)
   {
+
     $role = $this->session->userdata('role');
     $id_user = $this->session->userdata('id_user');
     $id_lokasi = $this->session->userdata('id_lokasi');
@@ -28,24 +29,50 @@ class Laporan extends CI_Controller
       ];
       $this->load->view('admin/layout/wrapper', $data, FALSE);
     } else {
-      $this->laporanMhs($role);
+      $this->laporanMhs($laporan);
     }
   }
 
-  function laporanMhs($role)
+  public function laporanDpl()
   {
-    $id_angkatan = $this->session->userdata('id_angkatan');
-    if (($role == 'LP2M') || $role == 'Admin') {
-      $mahasiswa = $this->AM->listMhsAngkatan($id_angkatan);
-    } else if ($role == 'DPL') {
-      $id_dpl = $this->session->userdata('id_user');
-      $mahasiswa = $this->AM->listMhsDpl($id_angkatan, $id_dpl);
-    }
+    $role = $this->session->userdata('role');
+    $id_user = $this->session->userdata('id_user');
+    $id_lokasi = $this->session->userdata('id_lokasi');
+
+    $laporan = $this->AM->cekLaporan($id_user, $id_lokasi);
     $data = [
-      'mahasiswa' => $mahasiswa,
-      'content'   => 'admin/laporan/list_mhs_laporan'
+      'laporan' => $laporan,
+      'add'         => 'admin/laporan/add',
+      'content'     => 'admin/laporan/index_mhs'
     ];
     $this->load->view('admin/layout/wrapper', $data, FALSE);
+  }
+
+  function laporanMhs($laporan)
+  {
+    $role = $this->session->userdata('role');
+    $id_angkatan = $this->session->userdata('id_angkatan');
+
+    if ($laporan == "Mahasiswa") {
+      if (($role == 'LP2M') || $role == 'Admin') {
+        $mahasiswa = $this->AM->listMhsAngkatan($id_angkatan);
+      } else if ($role == 'DPL') {
+        $id_dpl = $this->session->userdata('id_user');
+        $mahasiswa = $this->AM->listMhsDpl($id_angkatan, $id_dpl);
+      }
+      $data = [
+        'mahasiswa' => $mahasiswa,
+        'content'   => 'admin/laporan/list_mhs_laporan'
+      ];
+      $this->load->view('admin/layout/wrapper', $data, FALSE);
+    } else if ($laporan == "DPL") {
+      $dpl = $this->AM->listDpl();
+      $data = [
+        'mahasiswa'       => $dpl,
+        'content'   => 'admin/laporan/list_mhs_laporan'
+      ];
+      $this->load->view('admin/layout/wrapper', $data, FALSE);
+    }
   }
 
   function detail($id_laporan)
@@ -67,6 +94,7 @@ class Laporan extends CI_Controller
 
     $this->load->helper('string');
 
+    $role = $this->session->userdata('role');
 
     $required = '%s tidak boleh kosong';
     $valid = $this->form_validation;
@@ -97,6 +125,7 @@ class Laporan extends CI_Controller
             'id_user'           => $this->session->userdata('id_user'),
             'id_lokasi'         => $this->session->userdata('id_lokasi'),
             'id_angkatan'       => $this->session->userdata('id_angkatan'),
+            'role'              => $role,
             'nama_laporan'     => $i->post('nama_laporan'),
             'dokumen'          => $config['upload_path'] . $upload_data['uploads']['file_name']
           ];

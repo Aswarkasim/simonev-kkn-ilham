@@ -15,6 +15,7 @@
         <tr>
           <th width="40px">No</th>
           <th>Nama Mahasiswa</th>
+          
           <th width="200px">TIndakan</th>
         </tr>
       </thead>
@@ -24,6 +25,7 @@
           <tr>
             <td><?= $no++; ?></td>
             <td><a href="<?= base_url('admin/laporan/download/' . $row->id_laporan) ?>"><strong><?= '$row->nama_laporan;' ?></strong></a></td>
+            
             <td>
               <a class="btn btn-success" href="<?= base_url('admin/laporan/edit/' . $row->id_laporan) ?>"><i class="fa fa-edit"></i> Edit</a>
               <a class="btn btn-danger tombol-hapus" href="<?= base_url('admin/laporan/delete/' . $row->id_laporan) ?>"><i class="fa fa-trash"></i> Hapus</a>

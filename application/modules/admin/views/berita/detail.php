@@ -4,18 +4,26 @@
     <div class="box-header with-border">
       <div class="user-block">
         <!-- <img class="img-circle" src="<?= base_url($berita->gambar) ?>" alt="User Image"> -->
-        <a href="<?= base_url('admin/berita') ?>" class="btn btn-success"><i class="fa fa-arrow-left"></i> List Berita</a>
+        <a href="<?= base_url('admin/berita/terkini') ?>" class="btn btn-success"><i class="fa fa-arrow-left"></i> Kembali</a>
 
-        <div class="btn-group">
-          <button type="button" class="btn <?= $berita->is_active == 1 ? 'btn-success' : 'btn-danger'; ?>"><i class="fa fa-power-off"></i> <?= $berita->is_active == 1 ? 'Aktif' : 'Non Aktif'; ?></button>
-          <button type="button" class="btn <?= $berita->is_active == 1 ? 'btn-success' : 'btn-danger'; ?> dropdown-toggle" data-toggle="dropdown">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="<?= base_url('admin/berita/is_active/' . $berita->id_berita . '/1'); ?>">Aktif</a></li>
-            <li><a href="<?= base_url('admin/berita/is_active/' . $berita->id_berita . '/0'); ?>">Non Aktif</a></li>
-          </ul>
-        </div>
+        <?php
+        $role = $this->session->userdata('role');
+        // echo $role;
+        if ($role == 'Profesi') {
+        ?>
+          <a href="<?= base_url('admin/berita') ?>" class="btn btn-success"><i class="fa fa-arrow-left"></i> List Berita</a>
+          <div class="btn-group">
+            <button type="button" class="btn <?= $berita->is_active == 1 ? 'btn-success' : 'btn-danger'; ?>"><i class="fa fa-power-off"></i> <?= $berita->is_active == 1 ? 'Aktif' : 'Non Aktif'; ?></button>
+            <button type="button" class="btn <?= $berita->is_active == 1 ? 'btn-success' : 'btn-danger'; ?> dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="<?= base_url('admin/berita/is_active/' . $berita->id_berita . '/1'); ?>">Aktif</a></li>
+              <li><a href="<?= base_url('admin/berita/is_active/' . $berita->id_berita . '/0'); ?>">Non Aktif</a></li>
+            </ul>
+          </div>
+        <?php } ?>
 
         <span>
           <h3><strong><?= $berita->judul_berita; ?></strong></h3>

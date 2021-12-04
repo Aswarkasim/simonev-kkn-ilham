@@ -73,9 +73,17 @@ class Dashboard extends CI_Controller
     private function admin($user)
     {
 
+        $saran = $this->Crud_model->listing('tbl_saran');
+        $lokasi = $this->Crud_model->listing('tbl_lokasi');
+        $prodi = $this->Crud_model->listing('tbl_prodi');
+        $angkatan = $this->Crud_model->listing('tbl_angkatan');
         $data = [
             'title'     => 'Dashboard',
             'user'      => $user,
+            'saran'      => $saran,
+            'lokasi'      => $lokasi,
+            'prodi'      => $prodi,
+            'angkatan'      => $angkatan,
             'content'   => 'admin/dashboard/index'
         ];
 
@@ -118,9 +126,11 @@ class Dashboard extends CI_Controller
         $this->load->view('admin/layout/wrapper', $data, FALSE);
     }
 
+
     function is_angkatan($id_angkatan)
     {
         $akt = $this->Crud_model->listingOne('tbl_angkatan', 'id_angkatan', $id_angkatan);
+
 
 
         $this->session->set_userdata('id_angkatan', $id_angkatan);

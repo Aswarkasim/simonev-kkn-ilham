@@ -23,7 +23,7 @@ class Prodi extends CI_Controller
       'delete'  => 'master/prodi/delete/'
     ];
 
-    $prodi = $this->MM->list('tbl_prodi', 'DESC');
+    $prodi = $this->MM->listGeneral('tbl_prodi', 'DESC');
     $data = [
 
       'prodi' => $prodi,
