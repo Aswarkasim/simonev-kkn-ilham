@@ -68,7 +68,7 @@ $role = $this->session->userdata('role');
                                     echo "active";
                                 }
                                 ?>"><a href="<?php echo base_url('admin/laporan/index/DPL')
-                                            ?>"><i class="fa fa-book"></i> <span>Laporan DPL</span></a></li>
+                                                ?>"><i class="fa fa-book"></i> <span>Laporan DPL</span></a></li>
                 <?php } ?>
 
                 <?php if ($role == 'DPL') { ?>

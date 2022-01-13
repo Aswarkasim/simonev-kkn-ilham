@@ -26,7 +26,7 @@
       <div class="icon">
         <i class="ion ion-bag"></i>
       </div>
-      <a href="<?= base_url('master/barang') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+      <!-- <a href="<?= base_url('master/barang') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a> -->
     </div>
   </div>
   <!-- ./col -->
@@ -41,7 +41,7 @@
       <div class="icon">
         <i class="fa fa-adjust"></i>
       </div>
-      <a href="<?= base_url('transaksi/masuk') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+      <!-- <a href="<?= base_url('transaksi/masuk') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a> -->
     </div>
   </div>
   <!-- ./col -->
@@ -56,7 +56,7 @@
       <div class="icon">
         <i class="fa fa-users "></i>
       </div>
-      <a href="<?= base_url('transaksi/keluar') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+      <!-- <a href="<?= base_url('transaksi/keluar') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a> -->
     </div>
   </div>
   <!-- ./col -->
@@ -71,7 +71,7 @@
       <div class="icon">
         <i class="fa fa-user"></i>
       </div>
-      <a href="<?= base_url('admin/user') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+      <!-- <a href="<?= base_url('admin/user') ?>" class="small-box-footer">Lihat Selengkapnya <i class="fa fa-arrow-circle-right"></i></a> -->
     </div>
   </div>
   <!-- ./col -->
