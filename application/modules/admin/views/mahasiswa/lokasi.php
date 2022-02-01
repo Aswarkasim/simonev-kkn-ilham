@@ -17,7 +17,7 @@
             <tr>
               <th width="40px">No</th>
               <th>Nama</th>
-              <th width="100px">Aksi</th>
+              <!-- <th width="100px">Aksi</th> -->
             </tr>
           </thead>
           <tbody id="targetData">
@@ -26,13 +26,13 @@
               <tr>
                 <td><?= $no ?></td>
                 <td><a href="<?= base_url('admin/mahasiswa/member/' . $row->id_lokasi); ?>"><strong><?= $row->nama_lokasi ?></strong></a></td>
-                <td>
+                <!-- <td>
                   <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#ModalEdit<?= $row->id_lokasi ?>">
                     <i class="fa fa-edit"></i>Edit
                   </button>
 
 
-                </td>
+                </td> -->
               </tr>
             <?php $no++;
             } ?>
