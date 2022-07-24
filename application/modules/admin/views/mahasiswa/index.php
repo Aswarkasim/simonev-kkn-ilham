@@ -7,7 +7,7 @@
     <div class="box-body">
 
         <p>
-            <a href="<?= base_url($add) ?>" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah</a>
+            <!-- <a href="<?= base_url($add) ?>" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah</a> -->
         </p>
 
         <table class="table DataTable">
