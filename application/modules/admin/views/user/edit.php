@@ -21,7 +21,7 @@
                                 <label for="" class="pull-right">Nama</label>
                             </div>
                             <div class="col-md-9">
-                                <input value="<?= $user->nama_user ?>" type="text" name="nama_user" class="form-control">
+                                <input value="<?= $user->namalengkap ?>" type="text" name="namalengkap" class="form-control">
                             </div>
                         </div>
                     </div>
